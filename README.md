@@ -1,1 +1,5 @@
 # Learning Vue.js
+### Introduction
+#### 1.1 Is Vue for you?
+Welcome to Learning Vue.js. I'm Mike Sullivan and if you're looking to become a more efficient and versatile front end developer, then you're in the right place. In this course, I'll talk about the reasons that we use frameworks like Vue.js in the first place and how to quickly get up and running with nothing more than a browser and a text editor. We'll take a detailed look at how to manage form controls and dynamic attributes of HTML elements. You'll learn how to take advantage of Vue's powerful reactivity system that allows us to keep our UI in sync with our data model and how to use Vue's flexible computed properties that are cached for optimal performance. There are many different reasons that developers choose one framework over another or end up loving a particular framework. If you're not a regular user of any framework yet, or if you're looking to switch to one that you're more comfortable with, then by the end of this course, you'll have a solid understanding of whether Vue can play a role in helping you get your work done or build your next passion project.
+#### 1.2 What you should know
