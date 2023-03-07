@@ -13,9 +13,14 @@
                 Type something: <input type="text" v-model="userInput"/>
             </div>
 
-            <div class="card">
-                <h2 v-text="userInput == 'flip' ? '' : cards[0].front"></h2>
-                <div v-html="userInput == 'flip' ? cards[0].back : ''"></div>
+            <div @click="flipped = !flipped" class="card">
+                <h2 v-text="flipped ? '' : cards[index].front"></h2>
+                <div v-html="flipped ? cards[index].back : ''"></div>
+            </div>
+
+            <div class="navigation">
+                <button @click="move(-1)" type="button">&#8592</button>
+                <button @click="move(1)" type="button">&#8594</button>
             </div>
 
             <a :href="readMoreUrl">read more</a>
@@ -29,10 +34,19 @@
                     return {
                         deckName: 'Vue.js Foundamentals',
                         cards,
+                        index: 0,
                         flipped: false,
                         readMoreUrl: 'https://vuejs.org/guide/introduction.html',
                         userInput: 'default'
                     };
+                },
+                methods: {
+                    move(change) {
+                        if (this.cards[this.index + change]) {
+                            this.index += change;
+                            this.flipped = false;
+                        }
+                    }
                 }
             };
 
