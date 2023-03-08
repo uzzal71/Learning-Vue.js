@@ -13,12 +13,13 @@
             <form method="post" action="">
                 <div>
                     <label for="name">Name: </label>
-                    <input type="text" id="name" name="name">
+                    <input v-model="deckName" type="text" id="name" name="name">({{ deckName.length }} characters)
                 </div>
 
                 <div>
                     <label for="description">Description: </label>
-                    <textarea id="description" name="description"></textarea>
+                    <textarea v-model="deckDescription" id="description" name="description"></textarea>
+                    ({{ 200 -deckDescription.length }} left)
                 </div>
 
                 <button type="submit">Create</button>
@@ -30,7 +31,8 @@
             const FlashCardApp = {
                 data() {
                     return {
-                        deckName: 'Vue.js Fundamentals'
+                        deckName: 'Vue.js Fundamentals',
+                        deckDescription: ''
                     };
                 }
             };
