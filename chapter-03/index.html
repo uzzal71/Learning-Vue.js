@@ -6,21 +6,17 @@
         <title>Flash Card App</title>
     </head>
     <body>
-        <div id="app">
-            <h1 v-text="deckName"></h1>
 
-            <div @click="flipped = !flipped" class="card">
-                <h2 v-cloak v-show="!flipped">{{ front }}</h2>
-                <div v-show="flipped" v-html="back"></div>
+        <div id="app" v-cloak>
+            <h1>Card Manager</h1>
+
+            <div v-for="(card, index) in cards" class="card-pair">
+                <div v-if="editIndex == index" class="card">
+                    <textarea @keydown.enter="editIndex = -1" v-model="card.front"></textarea>
+                </div>
+                <div v-else @click="editIndex = index" class="card" v-text="card.front"></div>
+                <div class="card" v-html="card.back"></div>
             </div>
-
-            <div class="navigation">
-                <button @click="move(-1)" type="button">&#8592;</button>
-
-                <button @click="move(1)" type="button">&#8594;</button>
-            </div>
-
-            <a :href="readMoreUrl">Read more</a>
         </div>
 
         <script src="data.js"></script>
@@ -29,31 +25,10 @@
             const FlashCardApp = {
                 data() {
                     return {
-                        deckName: 'Vue.js Fundamentals',
                         cards,
-                        index: 0,
-                        flipped: false,
-                        readMoreUrl: 'https://v3.vuejs.org/guide'                        
+                        editIndex: -1
                     };
                 },
-                methods: {
-                    move(change) {
-                        if (this.cards[this.index + change]) {
-                            this.flipped = false;
-                            this.index += change;
-                        }
-                    }
-                },
-                computed: {
-                    front() {
-                        return this.cards[this.index].front;
-                    },
-                    back() {
-                        for(let i = 0; i < 3; i++) {}
-
-                        return this.cards[this.index].back;
-                    }
-                }
             };
 
             const app = Vue.createApp(FlashCardApp).mount('#app');
