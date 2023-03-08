@@ -9,16 +9,7 @@
         <div id="app">
             <h1 v-text="deckName"></h1>
 
-            <div @click="flipped = !flipped" :class="{again: isRepeat}" class="card">
-                <h2 v-if="!flipped" v-text="front"></h2>
-                <div v-else>
-                    <div v-html="back"></div>
-                    <div class="score">
-                        <button @click.stop="gotIt">GOT IT</button>
-                        <button @click.stop="again">AGAIN</button>
-                    </div>
-                </div>
-            </div>
+            <flash-card :flipped="flipped" :is-repeat="isRepeat" :front="front" :back="back"></flash-card>
 
             <div class="navigation">
                 <button @click="move(-1)" type="button">&#8592;</button>
@@ -26,7 +17,7 @@
                 <button @click="move(1)" type="button">&#8594;</button>
             </div>
 
-            <read-more></read-more>
+            <read-more :url="readMoreUrl"></read-more>
         </div>
 
         <script src="data.js"></script>
@@ -79,14 +70,30 @@
                 }
             };
 
-            const app = Vue.createApp(FlashCardApp);
+            const app = Vue.createApp(FlashCardApp);            
 
             app.component('read-more', {
-                template: '<a href="https://v3.vuejs.org/guide">Read more</a>',
-                name: 'ReadMore'
+                template: '<a :href="url">Read more</a>',
+                name: 'ReadMore',
+                props: ['url']
             });
 
-            app.mount('#app')
+            app.component('flash-card', {
+                template: '<div @click="flipped = !flipped" :class="{again: isRepeat}" class="card"> \
+                            <h2 v-if="!flipped" v-text="front"></h2> \
+                            <div v-else> \
+                                <div v-html="back"></div> \
+                                <div class="score"> \
+                                    <button @click.stop="gotIt">GOT IT</button> \
+                                    <button @click.stop="again">AGAIN</button> \
+                                </div> \
+                            </div> \
+                        </div>',
+                name: 'FlashCard',
+                props: ['flipped', 'isRepeat', 'front', 'back']
+            });
+
+            app.mount('#app');
         </script>
     </body>
 </html>
