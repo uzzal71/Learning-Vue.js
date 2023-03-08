@@ -10,12 +10,18 @@
         <div id="app" v-cloak>
             <h1>Card Manager</h1>
 
-            <div v-for="(card, index) in cards" class="card-pair">
-                <div v-if="editIndex == index" class="card">
-                    <textarea @keydown.enter="editIndex = -1" v-model="card.front"></textarea>
+            <div :style="[textSizeControlStyle, anotherStyleObject]">
+                Text size: <span @click="fontSize++">bigger</span> | <span @click="fontSize--">smaller</span>
+            </div>
+            
+            <div :style="{'font-size' : fontSize + 'px'}">
+                <div v-for="(card, index) in cards" class="card-pair">
+                    <div v-if="editIndex == index" class="card">
+                        <textarea @keydown.enter="editIndex = -1" v-model="card.front"></textarea>
+                    </div>
+                    <div v-else @click="editIndex = index" class="card" v-text="card.front"></div>
+                    <div class="card" v-html="card.back"></div>
                 </div>
-                <div v-else @click="editIndex = index" class="card" v-text="card.front"></div>
-                <div class="card" v-html="card.back"></div>
             </div>
         </div>
 
@@ -26,7 +32,12 @@
                 data() {
                     return {
                         cards,
-                        editIndex: -1
+                        editIndex: -1,
+                        fontSize: 15,
+                        textSizeControlStyle: {
+                            textAlign: 'center',
+                            cursor: 'pointer'
+                        }
                     };
                 },
             };
