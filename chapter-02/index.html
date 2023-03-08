@@ -37,10 +37,31 @@
                         <input v-model="options" type="checkbox" id="reminders" value="reminders">
                         <label for="reminders">Enable reminders</label>
                     </div>
-                </div>
 
-                <div>
-                    Selected options: <strong>{{ options }}</strong>
+                    <fieldset class="leech-action">
+                        <legend>Leech action</legend>
+                        <div>
+                            <input v-model="leech" type="radio" id="tag" name="leech" value="tag">
+                            <label for="tag">tag</label>
+                        </div>
+                        <div>
+                            <input v-model="leech" type="radio" id="suspend" name="leech" value="suspend">
+                            <label for="suspend">suspend</label>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <div class="category">
+                    <label for="category">Category:</label>
+                    <select v-model="categoryId" name="category" id="category">
+                        <option value="">Select</option>
+                        <option value="1">Foreign Language</option>
+                        <option value="2">History</option>
+                        <option value="3">Biology</option>
+                        <option value="4">Geography</option>
+                        <option value="5">Law</option>
+                        <option value="6">Programming</option>
+                    </select>
                 </div>
 
                 <button type="submit">Create</button>
@@ -54,7 +75,9 @@
                     return {
                         deckName: 'Vue.js Fundamentals',
                         deckDescription: 'Core concepts and directives for working with Vue.js',
-                        options: []
+                        options: [],
+                        leech: 'tag',
+                        categoryId: ''
                     };
                 }
             };
