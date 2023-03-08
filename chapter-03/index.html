@@ -10,8 +10,8 @@
             <h1 v-text="deckName"></h1>
 
             <div @click="flipped = !flipped" class="card">
-                <h2 v-if="!flipped" v-text="front"></h2>
-                <div v-else-if="back" v-html="back"></div>
+                <h2 v-cloak v-show="!flipped">{{ front }}</h2>
+                <div v-show="flipped" v-html="back"></div>
             </div>
 
             <div class="navigation">
@@ -49,6 +49,8 @@
                         return this.cards[this.index].front;
                     },
                     back() {
+                        for(let i = 0; i < 3; i++) {}
+
                         return this.cards[this.index].back;
                     }
                 }
